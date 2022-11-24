@@ -9,8 +9,10 @@ pragma solidity ^0.8.7;
 import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+///@notice Strings never used
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+///@notice EDCSA never used
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 import "./ERC721AWhitelist.sol";
@@ -136,6 +138,7 @@ contract TradersClubDAO is ERC2981, ERC721A, Ownable, ReentrancyGuard, ERC721AWh
     /**
      * @dev Withdraw balnace to Team Address.
      */
+    /// @notice Recommend to withdraw with an amount
     function withdraw() external onlyOwner {
         payable(teamAddress).transfer(address(this).balance);
     }
@@ -144,6 +147,7 @@ contract TradersClubDAO is ERC2981, ERC721A, Ownable, ReentrancyGuard, ERC721AWh
      * Override Royalty Interface
      * @dev See {IERC165-supportsInterface}.
      */
+    /// @notice Comment indent mistake
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721A, ERC2981) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
@@ -151,6 +155,7 @@ contract TradersClubDAO is ERC2981, ERC721A, Ownable, ReentrancyGuard, ERC721AWh
     /**
      * @dev See {ERC721-_burn}. This override additionally clears the royalty information for the token.
      */
+    /// @notice Why is there a need to reset royalty after burn? Since the token cannot be traded any more
     function _burn(uint256 tokenId) internal virtual override {
         super._burn(tokenId);
         _resetTokenRoyalty(tokenId);
