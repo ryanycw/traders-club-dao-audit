@@ -47,7 +47,7 @@ contract TradersClubDAO is
     ) 
         ERC721A("TradersClubDAO", "TCDAO")
     {
-        if (_maxSupply < 1) {
+        if (_maxSupply < 1 || _amountForDev < 1 || _teamAddress == address(0)) {
             revert InvalidInput();
         }
 
